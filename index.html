@@ -7,68 +7,128 @@
   <meta name="description" content="Tam Rio Labs — Building magical digital experiences.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛰️</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+
     body {
       font-family: 'Inter', -apple-system, system-ui, sans-serif;
-      background: #f8f9fc;
-      color: #1a1a2e;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 2rem;
+      overflow: hidden;
+      position: relative;
+      background: #0a0f1e;
     }
 
-    .container {
-      text-align: center;
+    /* Mesh gradient background */
+    .bg-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(20, 184, 166, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0f1e 0%, #0f172a 50%, #0a0f1e 100%);
+      animation: meshShift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes meshShift {
+      0% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%, 0% 0%; }
+      50% { background-position: 30% 10%, 70% 90%, 40% 60%, 90% 30%, 0% 0%; }
+      100% { background-position: 10% 30%, 90% 70%, 60% 40%, 70% 10%, 0% 0%; }
+    }
+
+    /* Topographic texture overlay */
+    .topo-texture {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cpath d='M300 150c-82.8 0-150 67.2-150 150s67.2 150 150 150 150-67.2 150-150-67.2-150-150-150zm0 30c66.3 0 120 53.7 120 120s-53.7 120-120 120-120-53.7-120-120 53.7-120 120-120zm0 30c-49.7 0-90 40.3-90 90s40.3 90 90 90 90-40.3 90-90-40.3-90-90-90zm0 30c33.1 0 60 26.9 60 60s-26.9 60-60 60-60-26.9-60-60 26.9-60 60-60z' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3Cpath d='M150 0c-82.8 0-150 67.2-150 150s67.2 150 150 150 150-67.2 150-150S232.8 0 150 0zm0 30c66.3 0 120 53.7 120 120s-53.7 120-120 120S30 216.3 30 150 83.7 30 150 30zm0 30c-49.7 0-90 40.3-90 90s40.3 90 90 90 90-40.3 90-90-40.3-90-90-90z' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3Cpath d='M450 300c-82.8 0-150 67.2-150 150s67.2 150 150 150 150-67.2 150-150-67.2-150-150-150zm0 30c66.3 0 120 53.7 120 120s-53.7 120-120 120-120-53.7-120-120 53.7-120 120-120z' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 400px 400px;
+      pointer-events: none;
+    }
+
+    /* Glass card */
+    .card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 3.5rem 3rem;
       max-width: 540px;
+      width: 100%;
+      text-align: center;
+      box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .logo {
       width: 180px;
       height: auto;
       margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease-out 0.1s both;
     }
 
     h1 {
       font-size: 2.5rem;
-      font-weight: 700;
-      color: #0f172a;
-      letter-spacing: -0.02em;
+      font-weight: 800;
+      color: #f1f5f9;
+      letter-spacing: -0.03em;
       margin-bottom: 0.5rem;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
     .tagline {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 300;
-      color: #64748b;
+      color: rgba(148, 163, 184, 0.9);
       margin-bottom: 2.5rem;
       line-height: 1.6;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
     }
 
     .divider {
       width: 48px;
-      height: 3px;
-      background: linear-gradient(90deg, #0f172a, #334155);
+      height: 2px;
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.6), rgba(139, 92, 246, 0.6));
       border-radius: 2px;
       margin: 0 auto 2.5rem;
+      animation: fadeInUp 0.8s ease-out 0.35s both;
     }
 
     .status {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #fff;
-      border: 1px solid #e2e8f0;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 100px;
-      padding: 10px 20px;
+      padding: 10px 22px;
       font-size: 0.875rem;
-      color: #475569;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      color: rgba(203, 213, 225, 0.9);
+      animation: fadeInUp 0.8s ease-out 0.4s both;
     }
 
     .status-dot {
@@ -76,58 +136,60 @@
       height: 8px;
       background: #22c55e;
       border-radius: 50%;
-      animation: pulse 2s infinite;
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+      animation: pulse 2s ease-in-out infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(34, 197, 94, 0.5); }
+      50% { opacity: 0.6; box-shadow: 0 0 4px rgba(34, 197, 94, 0.3); }
     }
 
     .products {
-      margin-top: 3rem;
+      margin-top: 2.5rem;
+      animation: fadeInUp 0.8s ease-out 0.5s both;
     }
 
     .products a {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: #0f172a;
+      color: #e2e8f0;
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
-      padding: 8px 16px;
-      border-radius: 8px;
-      transition: background 0.2s;
+      padding: 10px 20px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
     }
 
     .products a:hover {
-      background: #e2e8f0;
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.15), 0 0 40px rgba(56, 189, 248, 0.08);
+      color: #fff;
     }
 
     .footer {
-      margin-top: 4rem;
+      margin-top: 3rem;
       font-size: 0.8rem;
-      color: #94a3b8;
-    }
-
-    .footer a {
-      color: #64748b;
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
+      color: rgba(100, 116, 139, 0.7);
+      animation: fadeInUp 0.8s ease-out 0.6s both;
     }
 
     @media (max-width: 480px) {
       h1 { font-size: 2rem; }
       .logo { width: 140px; }
+      .card { padding: 2.5rem 1.5rem; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="bg-gradient"></div>
+  <div class="topo-texture"></div>
+
+  <div class="card">
     <img src="logo.png" alt="Tam Rio Labs" class="logo">
     <h1>Tam Rio Labs</h1>
     <p class="tagline">Building magical digital experiences.</p>
