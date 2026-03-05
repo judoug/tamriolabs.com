@@ -18,7 +18,7 @@
       align-items: center;
       justify-content: center;
       padding: 2rem;
-      overflow: hidden;
+      overflow-x: hidden;
       position: relative;
       background: #0a0f1e;
     }
@@ -49,45 +49,33 @@
       inset: 0;
       z-index: 1;
       opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='800'%3E%3Cpath d='M1186 801l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3Cpath d='M-106 801l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3Cpath d='M886 501l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3Cpath d='M1586 201l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3Cpath d='M294 201l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='800'%3E%3Cpath d='M1186 801l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3Cpath d='M886 501l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3Cpath d='M294 201l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3C/svg%3E");
       background-size: 800px 400px;
       pointer-events: none;
     }
 
-    /* Glass card */
-    .card {
-      position: relative;
-      z-index: 2;
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 24px;
-      padding: 3.5rem 3rem;
-      max-width: 540px;
-      width: 100%;
-      text-align: center;
-      box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      animation: fadeInUp 0.8s ease-out both;
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Hero section — outside cards */
+    .hero {
+      margin-bottom: 3rem;
     }
 
     .logo {
       width: 180px;
       height: auto;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       animation: fadeInUp 0.8s ease-out 0.1s both;
     }
 
@@ -96,7 +84,7 @@
       font-weight: 800;
       color: #f1f5f9;
       letter-spacing: -0.03em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
       animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
@@ -104,20 +92,11 @@
       font-size: 1.1rem;
       font-weight: 300;
       color: rgba(148, 163, 184, 0.9);
-      margin-bottom: 2.5rem;
       line-height: 1.6;
       animation: fadeInUp 0.8s ease-out 0.3s both;
     }
 
-    .divider {
-      width: 48px;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(56, 189, 248, 0.6), rgba(139, 92, 246, 0.6));
-      border-radius: 2px;
-      margin: 0 auto 2.5rem;
-      animation: fadeInUp 0.8s ease-out 0.35s both;
-    }
-
+    /* Status badge */
     .status {
       display: inline-flex;
       align-items: center;
@@ -128,7 +107,8 @@
       padding: 10px 22px;
       font-size: 0.875rem;
       color: rgba(203, 213, 225, 0.9);
-      animation: fadeInUp 0.8s ease-out 0.4s both;
+      margin-top: 1.5rem;
+      animation: fadeInUp 0.8s ease-out 0.35s both;
     }
 
     .status-dot {
@@ -145,32 +125,76 @@
       50% { opacity: 0.6; box-shadow: 0 0 4px rgba(34, 197, 94, 0.3); }
     }
 
-    .products {
-      margin-top: 2.5rem;
+    /* Project cards grid */
+    .projects {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
       animation: fadeInUp 0.8s ease-out 0.5s both;
     }
 
-    .products a {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #e2e8f0;
+    .project-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      text-align: center;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 10px 20px;
-      border-radius: 12px;
-      border: 1px solid transparent;
+      color: inherit;
+      box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
       transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    .products a:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 20px rgba(139, 92, 246, 0.15), 0 0 40px rgba(56, 189, 248, 0.08);
-      color: #fff;
+    .project-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(139, 92, 246, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
     }
 
+    .project-emoji {
+      font-size: 2.5rem;
+      line-height: 1;
+    }
+
+    .project-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(148, 163, 184, 0.8);
+      line-height: 1.5;
+    }
+
+    .project-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(56, 189, 248, 0.8);
+      margin-top: auto;
+      padding-top: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .project-card:hover .project-link {
+      color: rgba(56, 189, 248, 1);
+    }
+
+    /* Footer */
     .footer {
       margin-top: 3rem;
       font-size: 0.8rem;
@@ -178,10 +202,11 @@
       animation: fadeInUp 0.8s ease-out 0.6s both;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 520px) {
       h1 { font-size: 2rem; }
       .logo { width: 140px; }
-      .card { padding: 2.5rem 1.5rem; }
+      .projects { grid-template-columns: 1fr; }
+      .project-card { padding: 1.5rem 1.25rem; }
     }
   </style>
 </head>
@@ -189,23 +214,32 @@
   <div class="bg-gradient"></div>
   <div class="topo-texture"></div>
 
-  <div class="card">
-    <img src="logo.png" alt="Tam Rio Labs" class="logo">
-    <h1>Tam Rio Labs</h1>
-    <p class="tagline">Building magical digital experiences.</p>
-    <div class="divider"></div>
-    <div class="status">
-      <span class="status-dot"></span>
-      Something is brewing
+  <div class="container">
+    <div class="hero">
+      <img src="logo.png" alt="Tam Rio Labs" class="logo">
+      <h1>Tam Rio Labs</h1>
+      <p class="tagline">Building magical digital experiences.</p>
+      <div class="status">
+        <span class="status-dot"></span>
+        Something is brewing
+      </div>
     </div>
-    <div class="products" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-      <a href="https://wonderlens.ai" target="_blank">
-      <a href="https://meta.com/experiences/retrocalc-calculator/24839504592312185/" target="_blank">
-        🧮 RetroCalc →
+
+    <div class="projects">
+      <a href="https://wonderlens.ai" target="_blank" class="project-card">
+        <div class="project-emoji">✨</div>
+        <div class="project-name">WonderLens</div>
+        <div class="project-desc">Upload a photo of any room and watch fantasy characters come to life in your space with AI-generated video.</div>
+        <div class="project-link">wonderlens.ai →</div>
       </a>
-        ✨ WonderLens →
+      <a href="https://meta.com/experiences/retrocalc-calculator/24839504592312185/" target="_blank" class="project-card">
+        <div class="project-emoji">🧮</div>
+        <div class="project-name">RetroCalc</div>
+        <div class="project-desc">A retro-styled calculator built for Meta Quest. Simple, nostalgic, and fun — right on your virtual desk.</div>
+        <div class="project-link">Meta Quest Store →</div>
       </a>
     </div>
+
     <div class="footer">
       <p>Proudly built in Marin County, CA</p>
     </div>
