@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tam Rio Labs</title>
+  <meta name="description" content="Tam Rio Labs — Building magical digital experiences.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛰️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      background: #f8f9fc;
+      color: #1a1a2e;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 540px;
+    }
+
+    .logo {
+      width: 180px;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: #64748b;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, #0f172a, #334155);
+      border-radius: 2px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-size: 0.875rem;
+      color: #475569;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .products {
+      margin-top: 3rem;
+    }
+
+    .products a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .products a:hover {
+      background: #e2e8f0;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    .footer a {
+      color: #64748b;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 2rem; }
+      .logo { width: 140px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logo.png" alt="Tam Rio Labs" class="logo">
+    <h1>Tam Rio Labs</h1>
+    <p class="tagline">Building magical digital experiences.</p>
+    <div class="divider"></div>
+    <div class="status">
+      <span class="status-dot"></span>
+      Something is brewing
+    </div>
+    <div class="products">
+      <a href="https://wonderlens.ai" target="_blank">
+        ✨ WonderLens →
+      </a>
+    </div>
+    <div class="footer">
+      <p>San Rafael, California</p>
+      <p style="margin-top: 4px;">
+        <a href="mailto:hello@tamriolabs.com">hello@tamriolabs.com</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
