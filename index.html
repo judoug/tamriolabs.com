@@ -97,32 +97,6 @@
     }
 
     /* Status badge */
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 100px;
-      padding: 10px 22px;
-      font-size: 0.875rem;
-      color: rgba(203, 213, 225, 0.9);
-      margin-top: 1.5rem;
-      animation: fadeInUp 0.8s ease-out 0.35s both;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: #22c55e;
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(34, 197, 94, 0.5); }
-      50% { opacity: 0.6; box-shadow: 0 0 4px rgba(34, 197, 94, 0.3); }
     }
 
     /* Project cards grid */
@@ -218,11 +192,6 @@
     <div class="hero">
       <img src="logo.png" alt="Tam Rio Labs" class="logo">
       <p class="tagline">At Tam Rio Labs we build magical digital experiences.</p>
-      <div class="status">
-        <span class="status-dot"></span>
-        Something is brewing
-      </div>
-    </div>
 
     <div class="projects">
       <a href="https://wonderlens.ai" target="_blank" class="project-card">
