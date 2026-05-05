@@ -1,217 +1,573 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tam Rio Labs</title>
-  <meta name="description" content="Tam Rio Labs — At Tam Rio Labs we build magical digital experiences.">
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tam Rio Labs</title>
+<meta name="description" content="Tam Rio Labs — we build magical digital experiences. Proudly built in Marin County, CA." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-    body {
-      font-family: 'Inter', -apple-system, system-ui, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      overflow-x: hidden;
-      position: relative;
-      background: #0a0f1e;
-    }
+<style>
+  :root {
+    --bg: #0b1220;
+    --bg-2: #0f172a;
+    --ink: #eef0ec;
+    --ink-dim: #aab1ab;
+    --ink-soft: #6e756f;
+    --line: rgba(238, 240, 236, 0.10);
+    --line-strong: rgba(238, 240, 236, 0.18);
+    --accent: oklch(0.78 0.09 90);
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-    /* Mesh gradient background */
-    .bg-gradient {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background:
-        radial-gradient(ellipse at 20% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(20, 184, 166, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-        linear-gradient(180deg, #0a0f1e 0%, #0f172a 50%, #0a0f1e 100%);
-      animation: meshShift 20s ease-in-out infinite alternate;
-    }
+  /* contour map background */
+  .topo {
+    position: fixed; inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 50% 35%, #16223a 0%, var(--bg) 55%, #060a14 100%);
+  }
+  .topo svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0.55;
+  }
+  .topo::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, transparent 35%, rgba(0,0,0,0.55) 100%),
+      radial-gradient(ellipse at 50% 100%, transparent 40%, rgba(0,0,0,0.5) 100%);
+  }
 
-    @keyframes meshShift {
-      0% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%, 0% 0%; }
-      50% { background-position: 30% 10%, 70% 90%, 40% 60%, 90% 30%, 0% 0%; }
-      100% { background-position: 10% 30%, 90% 70%, 60% 40%, 70% 10%, 0% 0%; }
-    }
+  .grain {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: overlay;
+  }
 
-    /* Topographic texture overlay */
-    .topo-texture {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='800'%3E%3Cpath d='M1186 801l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3Cpath d='M886 501l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3Cpath d='M294 201l2-3h-4m-22 3l2-4c-2-3-7-3-10 0l-2 4m-14 0c3-6 1-13-6-16-6-3-13-1-16 6l-2 4c-3 6-1 13 6 16l2 1m-30-7l-2 4c-3 6-1 13 6 16 6 3 13 1 16-6l2-4c3-6 1-13-6-16-6-3-13-1-16 6m-70 7c7-15 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42l2 1m-62-15c7-16 1-34-14-42-16-7-34-1-42 14-7 16-1 34 14 42 16 7 34 1 42-14m-48 56c12-27 2-58-24-71-27-12-58-2-71 24-12 27-2 58 24 71l2 1m-198-15l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14m14-32l-6 14c-12 27-2 58 24 71 27 12 58 2 71-24l6-14c12-27 2-58-24-71-27-12-58-2-71 24' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3C/svg%3E");
-      background-size: 800px 400px;
-      pointer-events: none;
-    }
+  .page {
+    position: relative;
+    z-index: 2;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 40px 80px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  /* top bar */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .topbar .dot {
+    width: 6px; height: 6px; border-radius: 999px;
+    background: oklch(0.78 0.13 145);
+    box-shadow: 0 0 12px oklch(0.78 0.13 145 / 0.6);
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .topbar .right { display: flex; gap: 18px; }
 
-    .container {
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-      width: 100%;
-      text-align: center;
-    }
+  /* hero */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 36px 0 40px;
+  }
+  .hero img.logo {
+    width: 300px;
+    max-width: 80vw;
+    height: auto;
+    filter: drop-shadow(0 6px 30px rgba(0,0,0,0.5));
+    margin-bottom: 28px;
+  }
+  .tagline {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4.2vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    font-weight: 400;
+    max-width: 22ch;
+    margin: 0 auto;
+  }
+  .tagline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .sub {
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--ink-dim);
+    max-width: 52ch;
+    line-height: 1.6;
+  }
 
-    /* Hero section — outside cards */
-    .hero {
-      margin-bottom: 1.5rem;
-    }
+  /* projects */
+  .projects-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .projects-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
 
-    .logo {
-      width: 180px;
-      height: auto;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp 0.8s ease-out 0.1s both;
-    }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .page { padding: 32px 22px 56px; }
+    .hero { padding: 24px 0 28px; }
+  }
 
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #f1f5f9;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
-      animation: fadeInUp 0.8s ease-out 0.2s both;
-    }
+  .card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 26px 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: border-color 200ms ease, transform 200ms ease, background 200ms ease;
+    overflow: hidden;
+  }
+  .card:hover {
+    border-color: var(--line-strong);
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%);
+  }
+  .card:hover .arrow { transform: translate(2px, -2px); }
+  .card:hover .card-visual { transform: scale(1.02); }
 
-    .tagline {
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: rgba(148, 163, 184, 0.9);
-      line-height: 1.6;
-      margin-bottom: 0;
-      animation: fadeInUp 0.8s ease-out 0.3s both;
-    }
+  .card-visual {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #07101e;
+    border: 1px solid var(--line);
+    transition: transform 300ms ease;
+  }
+  .card-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.95;
+    filter: brightness(0.92) contrast(1) saturate(1);
+    transition: opacity 250ms ease, filter 250ms ease;
+  }
+  .card:hover .card-img {
+    opacity: 1;
+    filter: brightness(1.05) contrast(1.02) saturate(1.05);
+  }
+  .card-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(14,22,40,0) 40%, rgba(11,18,32,0.45) 100%);
+    pointer-events: none;
+  }
+  .card-visual.wonderlens {
+    background:
+      radial-gradient(ellipse at 30% 40%, oklch(0.55 0.18 300 / 0.55), transparent 60%),
+      radial-gradient(ellipse at 70% 65%, oklch(0.65 0.16 25 / 0.45), transparent 65%),
+      linear-gradient(180deg, #1a1726 0%, #0a0d11 100%);
+  }
+  .card-visual.retrocalc {
+    background:
+      linear-gradient(180deg, oklch(0.42 0.05 145) 0%, oklch(0.28 0.04 145) 100%);
+  }
+  .card-visual .vis-inner {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
 
-    /* Status badge */
-    }
+  /* WonderLens visual: floating frame */
+  .wl-frame {
+    width: 58%;
+    aspect-ratio: 4 / 5;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    backdrop-filter: blur(8px);
+    position: relative;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .wl-frame::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px dashed rgba(255,255,255,0.15);
+    border-radius: 4px;
+  }
+  .wl-frame .wl-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+  }
+  .wl-sparkle {
+    position: absolute;
+    color: oklch(0.85 0.1 90);
+    font-size: 14px;
+    opacity: 0.85;
+  }
 
-    /* Project cards grid */
-    .projects {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      animation: fadeInUp 0.8s ease-out 0.5s both;
-    }
+  /* RetroCalc visual: calculator */
+  .rc {
+    width: 56%;
+    aspect-ratio: 3 / 4;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #d9c8a3 0%, #b8a482 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.5),
+      inset 0 -2px 0 rgba(0,0,0,0.15),
+      0 12px 30px rgba(0,0,0,0.45);
+    padding: 8% 8% 10%;
+    display: flex; flex-direction: column; gap: 6%;
+  }
+  .rc-screen {
+    background: oklch(0.78 0.12 130);
+    border-radius: 4px;
+    height: 22%;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 0 8%;
+    font-family: var(--mono);
+    color: #1f2a1c;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+  .rc-keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5%;
+    flex: 1;
+  }
+  .rc-key {
+    background: linear-gradient(180deg, #f5ebd0 0%, #d8c8a3 100%);
+    border-radius: 3px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.7),
+      inset 0 -1px 0 rgba(0,0,0,0.15);
+  }
+  .rc-key.op {
+    background: linear-gradient(180deg, oklch(0.62 0.14 35) 0%, oklch(0.5 0.13 35) 100%);
+  }
 
-    .project-card {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      text-decoration: none;
-      color: inherit;
-      box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .card-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .card-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .card-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-dim);
+    margin: 0;
+  }
+  .card-foot {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .card-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .arrow {
+    display: inline-block;
+    transition: transform 200ms ease;
+  }
+  .platform {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
 
-    .project-card:hover {
-      background: rgba(255, 255, 255, 0.07);
-      border-color: rgba(255, 255, 255, 0.15);
-      box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.5),
-        0 0 30px rgba(139, 92, 246, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      transform: translateY(-2px);
-    }
+  /* footer */
+  .footer {
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .built-top {
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .pin-top {
+    width: 6px; height: 6px;
+    border-radius: 999px;
+    background: var(--accent);
+    display: inline-block;
+  }
 
-    .project-emoji {
-      font-size: 2.5rem;
-      line-height: 1;
-    }
-
-    .project-name {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #f1f5f9;
-    }
-
-    .project-desc {
-      font-size: 0.85rem;
-      font-weight: 300;
-      color: rgba(148, 163, 184, 0.8);
-      line-height: 1.5;
-    }
-
-    .project-link {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: rgba(56, 189, 248, 0.8);
-      margin-top: auto;
-      padding-top: 0.5rem;
-      transition: color 0.2s;
-    }
-
-    .project-card:hover .project-link {
-      color: rgba(56, 189, 248, 1);
-    }
-
-    /* Footer */
-    .footer {
-      margin-top: 2.5rem;
-      font-size: 0.8rem;
-      color: rgba(100, 116, 139, 0.7);
-      animation: fadeInUp 0.8s ease-out 0.6s both;
-    }
-
-    @media (max-width: 520px) {
-      h1 { font-size: 2rem; }
-      .logo { width: 140px; }
-      .projects { grid-template-columns: 1fr; }
-      .project-card { padding: 1.5rem 1.25rem; }
-    }
-  </style>
+  /* coords decorations - hidden in production */
+  .coords { display: none; }
+</style>
 </head>
 <body>
-  <div class="bg-gradient"></div>
-  <div class="topo-texture"></div>
 
-  <div class="container">
-    <div class="hero">
-      <img src="logo.png" alt="Tam Rio Labs" class="logo">
-      <p class="tagline">At Tam Rio Labs we build magical digital experiences.</p>
+<div class="topo" id="topo">
+  <!-- contour SVG injected by JS for organic randomness -->
+</div>
+<div class="grain"></div>
 
-    <div class="projects">
-      <a href="https://wonderlens.ai" target="_blank" class="project-card">
-        <div class="project-emoji">✨</div>
-        <div class="project-name">WonderLens</div>
-        <div class="project-desc">Upload a photo of any room and watch fantasy characters come to life in your space with AI-generated video.</div>
-        <div class="project-link">wonderlens.ai →</div>
+<main class="page">
+  <header class="topbar">
+    <div><span class="dot"></span>TAM RIO LABS / EST. 2024</div>
+    <div class="right">
+      <span class="built-top"><span class="pin-top"></span>PROUDLY BUILT IN MARIN</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <img src="logo-white.png" alt="Tam Rio Labs" class="logo" />
+    <h1 class="tagline">We build <em>magical</em> digital experiences.</h1>
+  </section>
+
+  <section>
+    <div class="projects-label">
+      <span>Current Projects</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="https://wonderlens.ai" target="_blank" rel="noopener">
+        <div class="card-visual">
+          <img src="wonderlens-logo.png" alt="WonderLens" class="card-img" />
+        </div>
+        <div class="card-body">
+          <div class="card-row">
+            <div class="card-name">WonderLens</div>
+            <div class="card-meta">AI · Web</div>
+          </div>
+          <p class="card-desc">Upload a photo of any room and watch fantasy characters come to life in your space with AI-generated video.</p>
+        </div>
+        <div class="card-foot">
+          <span class="card-link">wonderlens.ai <span class="arrow">↗</span></span>
+          <span class="platform">Web</span>
+        </div>
       </a>
-      <a href="https://meta.com/experiences/retrocalc-calculator/24839504592312185/" target="_blank" class="project-card">
-        <div class="project-emoji">🧮</div>
-        <div class="project-name">RetroCalc</div>
-        <div class="project-desc">A retro-styled calculator built for Meta Quest. Simple, nostalgic, and fun — right on your virtual desk.</div>
-        <div class="project-link">Meta Quest Store →</div>
+
+      <a class="card" href="https://meta.com/experiences/retrocalc-calculator/24839504592312185/" target="_blank" rel="noopener">
+        <div class="card-visual">
+          <img src="retrocalc-logo.png" alt="RetroCalc Calculator" class="card-img" />
+        </div>
+        <div class="card-body">
+          <div class="card-row">
+            <div class="card-name">RetroCalc</div>
+            <div class="card-meta">XR · Quest</div>
+          </div>
+          <p class="card-desc">A retro-styled calculator built for Meta Quest. Simple, nostalgic, and fun — right on your virtual desk.</p>
+        </div>
+        <div class="card-foot">
+          <span class="card-link">Meta Quest Store <span class="arrow">↗</span></span>
+          <span class="platform">Meta Quest</span>
+        </div>
       </a>
     </div>
+  </section>
 
-    <div class="footer">
-      <p>Proudly built in Marin County, CA</p>
-    </div>
-  </div>
+  <footer class="footer">
+    <span>© 2026 Tam Rio Labs LLC</span>
+  </footer>
+</main>
+
+<script>
+  // Generate organic contour lines as SVG paths.
+  (function () {
+    const host = document.getElementById('topo');
+    const W = 1600, H = 1000;
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+
+    // Two "peaks" — Mt Tam-ish — and a few minor centers
+    const peaks = [
+      { x: W * 0.42, y: H * 0.38, r: 110, ecc: 1.15, rot: -0.15 },
+      { x: W * 0.62, y: H * 0.46, r: 90,  ecc: 1.05, rot: 0.1 },
+      { x: W * 0.18, y: H * 0.72, r: 70,  ecc: 1.3,  rot: 0.4 },
+      { x: W * 0.82, y: H * 0.78, r: 80,  ecc: 1.2,  rot: -0.3 },
+    ];
+
+    function noise(seed) {
+      // simple deterministic pseudo-noise
+      let s = Math.sin(seed * 9301 + 49297) * 233280;
+      return s - Math.floor(s);
+    }
+
+    function ring(peak, level) {
+      const pts = [];
+      const N = 160;
+      const baseR = peak.r * (1 + level * 0.55);
+      const cos = Math.cos(peak.rot), sin = Math.sin(peak.rot);
+      for (let i = 0; i <= N; i++) {
+        const t = (i / N) * Math.PI * 2;
+        // wobble
+        const wob =
+          1 +
+          0.10 * Math.sin(t * 3 + level * 1.7) +
+          0.06 * Math.sin(t * 5 + level * 2.3) +
+          0.04 * Math.sin(t * 7 + level * 3.1) +
+          (noise(level * 13 + i) - 0.5) * 0.04;
+        const r = baseR * wob;
+        let x = Math.cos(t) * r;
+        let y = Math.sin(t) * r * peak.ecc;
+        // rotate
+        const rx = x * cos - y * sin;
+        const ry = x * sin + y * cos;
+        pts.push([peak.x + rx, peak.y + ry]);
+      }
+      return pts;
+    }
+
+    function pathFrom(pts) {
+      let d = `M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+      for (let i = 1; i < pts.length; i++) {
+        d += ` L ${pts[i][0].toFixed(1)} ${pts[i][1].toFixed(1)}`;
+      }
+      d += ' Z';
+      return d;
+    }
+
+    const g = document.createElementNS(svgNS, 'g');
+    const LEVELS = 14;
+    for (const peak of peaks) {
+      for (let l = 0; l < LEVELS; l++) {
+        const pts = ring(peak, l);
+        const p = document.createElementNS(svgNS, 'path');
+        p.setAttribute('d', pathFrom(pts));
+        p.setAttribute('fill', 'none');
+        p.setAttribute('stroke', 'rgba(180, 200, 185, 0.18)');
+        p.setAttribute('stroke-width', l % 5 === 0 ? '0.9' : '0.5');
+        p.setAttribute('vector-effect', 'non-scaling-stroke');
+        g.appendChild(p);
+      }
+    }
+
+    // a meandering "river" line cutting across — nods to the "Rio"
+    const river = document.createElementNS(svgNS, 'path');
+    let rd = '';
+    const ry0 = H * 0.55;
+    for (let i = 0; i <= 60; i++) {
+      const x = (i / 60) * W;
+      const y = ry0
+        + Math.sin(i * 0.35) * 28
+        + Math.sin(i * 0.11) * 60
+        + Math.cos(i * 0.22) * 18;
+      rd += (i === 0 ? 'M ' : ' L ') + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    river.setAttribute('d', rd);
+    river.setAttribute('fill', 'none');
+    river.setAttribute('stroke', 'rgba(170, 200, 200, 0.14)');
+    river.setAttribute('stroke-width', '1.2');
+    river.setAttribute('stroke-dasharray', '6 5');
+    g.appendChild(river);
+
+    svg.appendChild(g);
+    host.appendChild(svg);
+  })();
+</script>
+
 </body>
 </html>
